@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.testapp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+	
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <activity
+            android:name="com.example.testapp.TestAppMain"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+       
+        <activity
+            android:name="com.example.testapp.InAppPurchaseTesting"/>       
+        <activity android:name="tools.mikandi.tools.LibraryMain" />
+        <activity android:name="tools.mikandi.dev.login.LoginActivity" />
+        <activity android:name="tools.mikandi.dev.passreset.PasswordResetActivity" />
+        <activity android:name="tools.mikandi.dev.emailcheck.EmailCheckActivity" />
+        <activity android:name="com.mikandi.android.v4.activities.BuyGoldActivity" />
+        
+        <meta-data
+            android:name="devID"
+            android:value="testVal1" >
+        </meta-data>
+        <meta-data
+            android:name="devKey"
+            android:value="testVal2" >
+        </meta-data>
+        <meta-data
+            android:name="secretkey"
+            android:value="c9229668-f1af-11e3-9ab1-00259094537c" >
+        </meta-data>
+        <meta-data
+            android:name="appid"
+            android:value="12888" >
+        </meta-data>
+    </application>
+
+</manifest>
