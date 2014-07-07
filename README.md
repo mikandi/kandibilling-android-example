@@ -1,5 +1,5 @@
 # README #
-This is the example application for the Mikandi in-app library developer tools. This has been put together to bring
+This is the example application for the Mikandi in-app library developer tools. This has been put together to demonstate common use cases for the in-app library
 
 ### What is this repository for? ###
 
