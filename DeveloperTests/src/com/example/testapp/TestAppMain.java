@@ -55,7 +55,8 @@ public class TestAppMain extends ActionBarActivity {
  * WHY NOT CALL THE KANDILIBS METHODS FROM THESE BUTTON CLICK LISTENERS? 
  * 	- You can! Unless the Activity variable is required, if it is, then by passing in the "this" it references 
  * the inside of the button click listener as opposed to referencing the activity. (this causes an issue!) 
- * - You don't have to make any of these calls to KandiLibs at all work from button presses but its up to you!		
+ * - You don't have to make any of these calls to KandiLibs at all work from button presses but its up to you!
+ * - This is not the only way to make these calls, just the easiest to understand and demonstrate. 
  */
 		
 // -------------------buy gold button ------------------------------------------------------------------------------
@@ -65,6 +66,9 @@ public class TestAppMain extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			buyGold();
+			
+			// Or you can do 
+			// KandiLibs.requestBuyGold(TestAppMain.this);
 		} 
 	
 	});
