@@ -34,14 +34,7 @@
         <activity android:name="tools.mikandi.dev.emailcheck.EmailCheckActivity" />
         <activity android:name="com.mikandi.android.v4.activities.BuyGoldActivity" />
         
-        <meta-data
-            android:name="devID"
-            android:value="testVal1" >
-        </meta-data>
-        <meta-data
-            android:name="devKey"
-            android:value="testVal2" >
-        </meta-data>
+ 
         <meta-data
             android:name="secretkey"
             android:value="c9229668-f1af-11e3-9ab1-00259094537c" >
