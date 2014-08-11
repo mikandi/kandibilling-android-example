@@ -1,6 +1,8 @@
 # README #
 This is the example application for the Mikandi in-app library developer tools. This has been put together to demonstate common use cases for the in-app library
 
+**You will need to add you're own app id to the manifest to test this application properly.** 
+
 ### What is this repository for? ###
 
 * Demonstrating the use of the Mikandi in-app library. 
