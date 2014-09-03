@@ -14,4 +14,4 @@ This is the example application for the Mikandi in-app library developer tools. 
 
 ### Who do I talk to? ###
 
-* Any Questions or issues get in touch Kandilibs@mikandi.com
+* Any Questions or issues get in touch mike@mikandi.com
