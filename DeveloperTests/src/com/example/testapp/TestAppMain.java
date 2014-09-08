@@ -1,25 +1,20 @@
 package com.example.testapp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import tools.mikandi.dev.inapp.OnAuthorizeInAppListener;
 import tools.mikandi.dev.inapp.onPurchaseHistoryListener;
 import tools.mikandi.dev.inapp.onUserVerificationListener;
+import tools.mikandi.dev.library.KandiLibs;
 import tools.mikandi.dev.login.LoginResult;
-import tools.mikandi.dev.login.LoginStorageUtils;
-import tools.mikandi.dev.login.OnLoginResultListener;
 import tools.mikandi.dev.utils.UserInfoObject;
-import tools.mikandi.tools.KandiLibs;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class TestAppMain extends ActionBarActivity {
@@ -77,7 +72,7 @@ public class TestAppMain extends ActionBarActivity {
 
 	@Override
 	public void onClick(View v) {
-		String token = "token_test_app"; 
+		String token = "last_test_check"; 
 		String token_description = "this is a test token";
 		String token_amount = "100";
 		purchaseToken(token , token_description, token_amount);
@@ -105,7 +100,7 @@ public class TestAppMain extends ActionBarActivity {
 	btn_token_check.setOnClickListener(new Button.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			String token= "porn_package_test"; 
+			String token= "last_test_check"; 
 			UserInfoObject uio = UserInfoObject.getInstance(getApplicationContext());
 			boolean testPurchase = KandiLibs.checkPurchase(uio, token);
 			Log.i("Token Check " , "token check of " + token + " returns :" + testPurchase);
@@ -131,6 +126,8 @@ public class TestAppMain extends ActionBarActivity {
 // ----------------------------Log in ------------------------------------------------ 
 	 btn_login.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
+				
+				Log.i("DEBUGGING XML ERROR: " , "Button Pressed");
 				logUserIn();
 			}
 		});
@@ -215,6 +212,8 @@ public class TestAppMain extends ActionBarActivity {
 		// within the buttonlistener (this referes to the listener not the activity) 
 		
 		uio = UserInfoObject.getInstance(context);
+		Log.i("DEBUGGING XML ERROR: " , "uio instance retreived");
+		
 		KandiLibs.requestLogin(this, uio);
 	}	
 }
