@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class TestAppMain extends ActionBarActivity {
+public class TestAppMain extends ActionBarActivity  {
 
 	private Button btn_listPurchases, btn_login, btn_logout, btn_loggedIn, btn_valid_user , btn_token_check,  btn_make_purchase;
 	private Button btn_buy_gold;
@@ -61,9 +61,6 @@ public class TestAppMain extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			buyGold();
-			
-			// Or you can do 
-			// KandiLibs.requestBuyGold(TestAppMain.this);
 		} 
 	
 	});

@@ -26,8 +26,7 @@
             </intent-filter>
         </activity>
        
-        <activity
-            android:name="com.example.testapp.InAppPurchaseTesting"/>       
+        <activity android:name="com.example.testapp.InAppPurchaseTesting"/>       
         <activity android:name="tools.mikandi.tools.LibraryMain" />
         <activity android:name="tools.mikandi.dev.login.LoginActivity" />
         <activity android:name="tools.mikandi.dev.passreset.PasswordResetActivity" />
