@@ -92,4 +92,23 @@
         android:layout_alignParentRight="true"
         android:text="check token" />
 
+    <Button
+        android:id="@+id/btn_installer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/btn_list_purchases"
+        android:layout_below="@+id/myTextView"
+        android:text="Install!" />
+
+    <Button
+        android:id="@+id/btn_whoinstalled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_installer"
+        android:layout_alignBottom="@+id/btn_installer"
+        android:layout_alignLeft="@+id/btn_valid"
+        android:layout_alignParentRight="true"
+        android:text="Check? " />
+
 </RelativeLayout>
