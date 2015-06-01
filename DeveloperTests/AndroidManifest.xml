@@ -31,7 +31,7 @@
         <activity android:name="tools.mikandi.dev.passreset.PasswordResetActivity" />
         <activity android:name="tools.mikandi.dev.emailcheck.EmailCheckActivity" />
         <activity android:name="com.mikandi.android.v4.activities.BuyGoldActivity" />
-        
+        <activity android:name= "tools.mikandi.dev.ads.fullScreenActivity"/>
  
         <meta-data
             android:name="secretkey"

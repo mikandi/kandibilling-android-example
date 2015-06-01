@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import tools.mikandi.dev.ads.fullScreenActivity;
 import tools.mikandi.dev.inapp.OnAuthorizeInAppListener;
 import tools.mikandi.dev.inapp.onPurchaseHistoryListener;
 import tools.mikandi.dev.inapp.onUserVerificationListener;
@@ -28,6 +29,8 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 
 	private Button btn_forceinstaller , btn_listPurchases, btn_login, btn_logout, btn_loggedIn, btn_valid_user , btn_token_check,  btn_make_purchase;
 	private Button btn_buy_gold, btn_whoinstalled;
+	private Button btn_ad;
+	
 	private UserInfoObject uio = null; 
 	private static Context context;
 	final static String EXTRA_INSTALLER_PACKAGE_NAME = "android.intent.extra.INSTALLER_PACKAGE_NAME";
@@ -52,18 +55,16 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		btn_make_purchase = (Button) findViewById(R.id.btn_make_purchase);
 		btn_forceinstaller = (Button) findViewById(R.id.btn_installer);
 		btn_whoinstalled = (Button) findViewById(R.id.btn_whoinstalled);
+		btn_ad = (Button) findViewById(R.id.btn_adcheck);
 		
 		
 	
 		
-		// this installer reinstalls the application and sets the installer to the def Mikandi installer to allow 
-		// you to see and understand how our drm works. 
-		btn_forceinstaller.setEnabled(false);
-
 
 //--------------------------------------------------------- install check -------------------------------------------------------------		
-		
-		btn_forceinstaller.setOnClickListener(this);	
+		// this installer reinstalls the application and sets the installer to the def Mikandi installer to allow 
+		// you to see and understand how our drm works. 
+		//	btn_forceinstaller.setOnClickListener(this);	
 		
 		//this button checks the installer of the app. MiKandi sets the installer 
 		//variable to "com.mikandi.vending" while the installer variable would be 
@@ -78,7 +79,7 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		btn_logout.setOnClickListener(this);
 		btn_loggedIn.setOnClickListener(this);
 		btn_login.setOnClickListener(this);
-
+		btn_ad.setOnClickListener(this);
 	 
 	}
 
@@ -92,9 +93,10 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		case R.id.btn_login:
 			if (debug) Log.i(" " , "Button Pressed");
 			logUserIn(uio);
+			
 			break;
 		case R.id.btn_list_purchases:
-			getPreviousPurchases(uio);
+			dumpPurchaseListPurchases(uio);
 			break;
 		case R.id.btn_logout:
 			KandiLibs.logOutUser(uio);
@@ -116,9 +118,9 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			buyGold();
 			break;
 		case R.id.btn_make_purchase:
-			String token2 = "last_test_check"; 
+			String token2 = "porn_package_one"; 
 			String token_description = "this is a test token";
-			String token_amount = "100";
+			String token_amount = "200";
 			purchaseToken(token2 , token_description, token_amount);
 			break;
 		case R.id.btn_installer:
@@ -127,15 +129,20 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		case R.id.btn_whoinstalled:
 			//	KandiLibs.checkInstaller(context);	
 			break;
-		
+		case R.id.btn_adcheck:
+			Intent i = new Intent(this, fullScreenActivity.class);
+			this.startActivity(i);
+			break;
 		};
 		
 	}
 	
-	
-	
-	
-	
+// -------------------------------------------------------------------
+	protected void fullScreenAd() { 
+		Intent i = new Intent(this, fullScreenActivity.class); 
+		this.startActivity(i);
+	}
+// ----------------------------------------------------------------	
 	
 // -------------------------------------- Purchase Token  -----------------------------------------------------------------------
 	protected void purchaseToken(final String token, String token_description,
@@ -146,14 +153,14 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			@Override
 			public void Sucess() {
 				if (debug)	Log.i("Purchase Success" , "" + token + " purchased");
-				
 			}
 
 			@Override
 			public void Failed(int code) {
-				if (debug) Log.i("Purchase failed" , "" + token + " was not purchased ");
+				if (debug) Log.i("Purchase failed" , "" + token + " was not purchased. Code returned is " + code);
 			}
-			} );	
+			
+		} );	
 	
  
 	}
@@ -161,6 +168,9 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 	protected void buyGold() {
 			KandiLibs.requestBuyGold(this);
 	}
+	
+	
+	
 // ------------------------------------------------ verifying user ----------------------------------------------
 	protected void verifyUser(final UserInfoObject uio) {
 		
@@ -170,13 +180,13 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		@Override
 		public void userVerifyFailed(int code) {
 			Toast.makeText(getApplicationContext(), "user not verified code " + code,Toast.LENGTH_LONG).show();
-			if (debug) Log.e(tag , "verify user was unsucessful - user has NOT purchased app");
+			if (debug) Log.i(tag , "verify user was unsucessful - user has NOT purchased app");
 		}
 
 		@Override
 		public void userVerifiedSuccessfully() {
 			Toast.makeText(getApplicationContext(), "Verified user ", Toast.LENGTH_LONG).show();
-			if (debug) Log.e(tag , "Verifying was sucessful - user has purchased app");
+			if (debug) Log.i(tag , "Verifying was sucessful - user has purchased app");
 		}
 		} );
 	}
@@ -188,8 +198,8 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 	}
 
 // ----------------------------------------------------Purchase History ------------------------------------------------------------ >> -
-
-	private void getPreviousPurchases(final UserInfoObject uio) {
+// for testing
+	private void dumpPurchaseListPurchases(final UserInfoObject uio) {
 		KandiLibs.requestPurchaseHistory(uio, new onPurchaseHistoryListener() {
 			
 			@Override
@@ -203,7 +213,12 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			
 			@Override
 			public void onFailedHistoryRetrieved() {
-				if (debug) Log.i(tag , "failed purchase History no returned list");
+				Toast.makeText(getBaseContext(), "failed purchase History no returned list" , Toast.LENGTH_LONG).show(); 
+			}
+
+			@Override
+			public void onNoPurchases() {
+				Toast.makeText(getBaseContext(), " No Purchases found " , Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -213,8 +228,16 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		// "this" doesn't reference the correct thing if the code below is 
 		// within the buttonlistener (this referes to the listener not the activity) 
 		
-		uio = UserInfoObject.getInstance(context);
-		KandiLibs.requestLogin(this, uio);
+	//	uio = UserInfoObject.getInstance(context);
+	//	KandiLibs.requestLogin(this, uio);
+		
+		
+		KandiLibs.requestAdTest(this); 
+		
+		
+		
+		
+		
 	}
 	// ---------------------------------------------- Install intent testing ----------
 	

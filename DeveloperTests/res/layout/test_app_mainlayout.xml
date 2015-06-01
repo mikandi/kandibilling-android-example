@@ -110,5 +110,16 @@
         android:layout_alignLeft="@+id/btn_valid"
         android:layout_alignParentRight="true"
         android:text="Check? " />
+    
+    
+    <Button 
+        android:id = "@+id/btn_adcheck"
+        android:layout_width = "wrap_content"
+        android:layout_alignLeft="@id/btn_installer"
+        android:layout_alignRight = "@id/btn_installer"
+        android:layout_below = "@id/btn_logout"
+		android:text = "Ads "
+		/>
+
 
 </RelativeLayout>
