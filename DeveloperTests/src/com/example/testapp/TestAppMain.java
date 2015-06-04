@@ -3,8 +3,10 @@ package com.example.testapp;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Adler32;
 
-import tools.mikandi.dev.ads.fullScreenActivity;
+import tools.mikandi.dev.ads.OnFullScreenAdDisplayedListener;
+import tools.mikandi.dev.ads.fullScreenAd;
 import tools.mikandi.dev.inapp.OnAuthorizeInAppListener;
 import tools.mikandi.dev.inapp.onPurchaseHistoryListener;
 import tools.mikandi.dev.inapp.onUserVerificationListener;
@@ -57,10 +59,7 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		btn_whoinstalled = (Button) findViewById(R.id.btn_whoinstalled);
 		btn_ad = (Button) findViewById(R.id.btn_adcheck);
 		
-		
 	
-		
-
 //--------------------------------------------------------- install check -------------------------------------------------------------		
 		// this installer reinstalls the application and sets the installer to the def Mikandi installer to allow 
 		// you to see and understand how our drm works. 
@@ -84,6 +83,7 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 	}
 
 	
+	@SuppressWarnings("serial")
 	@Override
 	public void onClick(View v) {
 		// updated instance of for each KandiLibs library. 
@@ -93,7 +93,6 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		case R.id.btn_login:
 			if (debug) Log.i(" " , "Button Pressed");
 			logUserIn(uio);
-			
 			break;
 		case R.id.btn_list_purchases:
 			dumpPurchaseListPurchases(uio);
@@ -106,7 +105,7 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			if (debug) Log.i(tag , loggedIn == true ? "Logged in sucessfully " : "Failed to Log in ");
 			break;
 		case R.id.btn_valid:
-			Log.i("verifying user" , "about to verify user!");
+			if (debug) Log.i("verifying user" , "about to verify user!");
 			verifyUser(uio);
 			break;
 		case R.id.btn_tokencheck:
@@ -130,17 +129,23 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			//	KandiLibs.checkInstaller(context);	
 			break;
 		case R.id.btn_adcheck:
-			Intent i = new Intent(this, fullScreenActivity.class);
-			this.startActivity(i);
+			fullScreenAd(new OnFullScreenAdDisplayedListener() {
+				@Override
+				public void AdFinished() {
+					Toast.makeText(uio.getContext(), "Ad finished" , Toast.LENGTH_SHORT).show();
+				}
+			});
 			break;
 		};
 		
 	}
 	
 // -------------------------------------------------------------------
-	protected void fullScreenAd() { 
-		Intent i = new Intent(this, fullScreenActivity.class); 
+	protected void fullScreenAd(OnFullScreenAdDisplayedListener l) { 
+		UserInfoObject.getInstance(context).setFullScreenAdListener(l);
+		Intent i = new Intent(uio.getContext(), fullScreenAd.class); 
 		this.startActivity(i);
+	
 	}
 // ----------------------------------------------------------------	
 	
@@ -228,13 +233,8 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		// "this" doesn't reference the correct thing if the code below is 
 		// within the buttonlistener (this referes to the listener not the activity) 
 		
-	//	uio = UserInfoObject.getInstance(context);
-	//	KandiLibs.requestLogin(this, uio);
-		
-		
-		KandiLibs.requestAdTest(this); 
-		
-		
+		uio = UserInfoObject.getInstance(context);
+		KandiLibs.requestLogin(this, uio);
 		
 		
 		
