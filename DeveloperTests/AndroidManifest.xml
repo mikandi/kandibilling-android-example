@@ -32,7 +32,7 @@
         <activity android:name="tools.mikandi.dev.passreset.PasswordResetActivity" />
         <activity android:name="tools.mikandi.dev.emailcheck.EmailCheckActivity" />
         <activity android:name="com.mikandi.android.v4.activities.BuyGoldActivity" />
-        <activity android:name= "tools.mikandi.dev.ads.fullScreenAd" />
+        <activity android:name= "tools.mikandi.dev.ads.FullScreenAd" />
  
         <meta-data
             android:name="secretkey"
@@ -42,6 +42,13 @@
             android:name="appid"
             android:value="12888" >
         </meta-data>
+        <meta-data
+            android:name="publisherid"
+            android:value = "1234123">
+        </meta-data>
+        
+        
+        
     </application>
 
 </manifest>

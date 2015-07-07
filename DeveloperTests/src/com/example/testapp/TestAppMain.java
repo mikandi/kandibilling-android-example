@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Adler32;
 
+import tools.mikandi.dev.ads.FullScreenAd;
 import tools.mikandi.dev.ads.OnFullScreenAdDisplayedListener;
-import tools.mikandi.dev.ads.fullScreenAd;
 import tools.mikandi.dev.inapp.OnAuthorizeInAppListener;
 import tools.mikandi.dev.inapp.onPurchaseHistoryListener;
 import tools.mikandi.dev.inapp.onUserVerificationListener;
 import tools.mikandi.dev.library.KandiLibs;
-import tools.mikandi.dev.login.LoginResult;
+import tools.mikandi.dev.login.LibraryLoginResult;
 import tools.mikandi.dev.utils.InstallerCheck;
 import tools.mikandi.dev.utils.UserInfoObject;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -137,15 +138,11 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			});
 			break;
 		};
-		
-	}
-	
+	}	
 // -------------------------------------------------------------------
 	protected void fullScreenAd(OnFullScreenAdDisplayedListener l) { 
 		UserInfoObject.getInstance(context).setFullScreenAdListener(l);
-		Intent i = new Intent(uio.getContext(), fullScreenAd.class); 
-		this.startActivity(i);
-	
+		KandiLibs.requestFullScreenAd(this, l);
 	}
 // ----------------------------------------------------------------	
 	
@@ -209,7 +206,7 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 			
 			@Override
 			public void onSucessfulHistoryRetrieved(List<String> lp) {
-				LoginResult myLr = uio.getLoginResult(); 	
+				LibraryLoginResult myLr = uio.getLoginResult(); 	
 				ArrayList<String> myArrayList = myLr.getArrayListTokens();
 				for (String s : myArrayList){
 					if (debug) Log.i(tag , "Printing out new purchases from saved lr: " + s);
@@ -264,6 +261,10 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 	
 	public static boolean isInstallerCorrect(Context ctx) { 
 		boolean myb = false; 
+		
+		Toast.makeText(ctx, "Login UserName is " + "" , Toast.LENGTH_SHORT).show();
+		
+		/*
 		final PackageManager pm = ctx.getPackageManager();
 		if (debug) Log.i("isInstallerCorrect" , "retreived package manager" );
 		File f = new File(context.getPackageResourcePath());
@@ -279,7 +280,7 @@ public class TestAppMain extends ActionBarActivity implements OnClickListener {
 		if (debug) Log.i("isInstallerCorrect" , "installer_final" + installer_final );
 		if (debug) Log.i("installer test" , "Initial (should be null) + : " + installer_initial + ", after intent the install is : " + installer_final); 
 		myb = InstallerCheck.checkInstaller(ctx);
-		
+		*/
 		return myb;
 	}
 	// -------------------------------------------------------------------------------
