@@ -6,13 +6,14 @@ This is the example application for the Mikandi in-app library developer tools. 
 ### What is this repository for? ###
 
 * Demonstrating the use of the Mikandi in-app billing library KandiBilling. 
-* 1.0
+* version 1.1
 
 ### How do I get set up? ###
 
-* Clone this repo and compile and build. Ensure that the KandiLibs has been added as a library. 
-* The KandiBilling library (Called KandiLibs) can be found here: https://github.com/mikandi/kandibilling-android
+* Clone this repository.
+* Import it into Android Studio. 
+* Build and run the project.  
 
 ### Who do I talk to? ###
 
-* Any Questions or issues get in touch mike@mikandi.com
+* Any questions or issues, get in touch support@mikandi.com
