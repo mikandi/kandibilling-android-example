@@ -6,7 +6,7 @@ This is the example application for the Mikandi in-app library developer tools. 
 ### What is this repository for? ###
 
 * Demonstrating the use of the Mikandi in-app billing library KandiBilling. 
-* version 1.1
+* version 1.2
 
 ### How do I get set up? ###
 

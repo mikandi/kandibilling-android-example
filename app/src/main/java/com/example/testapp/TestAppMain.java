@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +23,7 @@ import tools.mikandi.dev.library.KandiLibs;
 import tools.mikandi.dev.login.LibraryLoginResult;
 import tools.mikandi.dev.utils.UserInfoObject;
 
-public class TestAppMain extends ActionBarActivity implements OnClickListener
+public class TestAppMain extends AppCompatActivity implements OnClickListener
 {
     
     private Button btn_forceinstaller, btn_listPurchases, btn_login, btn_logout, btn_loggedIn, btn_valid_user, btn_token_check, btn_make_purchase;
