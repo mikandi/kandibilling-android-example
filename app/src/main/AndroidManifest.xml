@@ -10,10 +10,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MiKandiTheme">
 
         <activity
-            android:name="com.example.testapp.TestAppMain"
+            android:name="com.example.testapp.InAppBillingMainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -24,11 +24,13 @@
         </activity>
 
         <!--<activity android:name="tools.mikandi.tools.LibraryMain" />-->
-        <activity android:name="tools.mikandi.dev.login.LoginActivity"/>
-        <activity android:name="tools.mikandi.dev.passreset.PasswordResetActivity"/>
-        <activity android:name="tools.mikandi.dev.emailcheck.EmailCheckActivity"/>
+        <activity android:name="tools.mikandi.dev.activities.LoginActivity"/>
+        <activity android:name="tools.mikandi.dev.activities.PasswordResetActivity"/>
+        <activity android:name="tools.mikandi.dev.activities.EmailCheckActivity"/>
+        <activity android:name="tools.mikandi.dev.activities.RegisterActivity"/>
         <!--<activity android:name="com.mikandi.android.v4.activities.BuyGoldActivity" />-->
-        <activity android:name="tools.mikandi.dev.ads.FullScreenAd"/>
+        <activity android:name="tools.mikandi.dev.activities.FullScreenAd"/>
+
 
         <meta-data
             android:name="secretkey"

@@ -13,6 +13,6 @@ allprojects {
     repositories {
         jcenter()
         google()
-        flatDir { dir 'libs' }
+//        flatDir { dir 'libs' }
     }
 }

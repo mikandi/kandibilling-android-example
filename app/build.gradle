@@ -8,19 +8,49 @@ android {
         applicationId "com.example.testapp"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 12
-        versionName "1.2.0"
+        versionCode 14
+        versionName "2.0.0"
     }
 
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles.add(file('proguard-gvr.txt'))
+        }
+    }
+
+    flavorDimensions "phase"
+    productFlavors {
+        alpha {
+            dimension "phase"
+            buildConfigField "boolean", "IS_ALPHA", "true"
+            buildConfigField "boolean", "IS_BETA", "false"
+            buildConfigField "boolean", "IS_GA", "false"
+        }
+        beta {
+            dimension "phase"
+            buildConfigField "boolean", "IS_ALPHA", "false"
+            buildConfigField "boolean", "IS_BETA", "true"
+            buildConfigField "boolean", "IS_GA", "false"
+        }
+        ga { // General availability
+            dimension "phase"
+            buildConfigField "boolean", "IS_ALPHA", "false"
+            buildConfigField "boolean", "IS_BETA", "false"
+            buildConfigField "boolean", "IS_GA", "true"
         }
     }
 }
 
 dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation (name: "kandibilling-android-v1.0.6", ext: "aar")
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "com.android.support:design:28.0.0"
+    implementation "com.android.support:support-v4:28.0.0"
+    api 'org.apache.commons:commons-lang3:3.4'
+    api project(":kandibilling-android")
 }
