@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">testApp</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">MiKandi in-app billing</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_buy_gold_test">BuyGoldTest</string>
-    <string name="title_activity_testsssss">MainActivity</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_logout">Logout</string>
+    <string name="list_purchases">List purchases</string>
+    <string name="purchase_app">Purchase app</string>
+    <string name="check_purchase">Check purchase</string>
+    <string name="install">Install MiKandi</string>
+    <string name="ads">Ads</string>
+    <string name="buy_gold">Buy Gold</string>
 
 </resources>
