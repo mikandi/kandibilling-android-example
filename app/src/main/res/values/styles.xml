@@ -1,20 +1,75 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+    <style name="MiKandiTheme.Button" parent="android:style/Widget.Button">
+        <item name="android:background">@drawable/btn_grey</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:paddingLeft">6dip</item>
+        <item name="android:paddingRight">8dip</item>
+        <item name="android:paddingBottom">8dip</item>
+        <item name="android:paddingTop">8dip</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- Resource is not a Drawable (color or path): TypedValue{t=0x1/d=0x7f0a0058 a=1 r=0x7f0a0058} -->
+
+    <style name="MiKandiTheme.Button.Green">
+        <item name="android:background">@drawable/btn_green</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingLeft">6dip</item>
+        <item name="android:paddingRight">8dip</item>
+        <item name="android:paddingBottom">8dip</item>
+        <item name="android:paddingTop">8dip</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="MiKandiTheme.Button.Green.Account">
+        <item name="android:paddingTop">@dimen/acc_button_main_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/acc_button_main_vertical_padding</item>
+        <item name="android:paddingLeft">@dimen/acc_button_main_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/acc_button_main_horizontal_padding</item>
+        <item name="android:textSize">@dimen/acc_button_main_text_size</item>
+        <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="MiKandiTheme.Button.Transparent">
+        <item name="android:background">@drawable/btn_transparent_without_border</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingLeft">@dimen/acc_button_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/acc_button_horizontal_padding</item>
+        <item name="android:paddingBottom">@dimen/acc_button_vertical_padding</item>
+        <item name="android:paddingTop">@dimen/acc_button_vertical_padding</item>
+        <item name="android:textSize">@dimen/acc_button_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--	<style name="MiKandiTheme.Details.BuyGold">-->
+    <!--		<item name="android:textViewStyle">@style/MiKandiTheme.Link.BuyGold</item>-->
+    <!--		<item name="android:listViewStyle">@style/MiKandiTheme.Widget.ListView.Light.BuyGold</item>-->
+    <!--	</style>-->
+    <!--	<style name="MiKandiTheme.Details.BuyGold.Item">-->
+    <!--		<item name="android:textViewStyle">@style/MiKandiTheme.Link.BuyGold.Item</item>-->
+    <!--	</style>-->
+
+    <!-- ONETAP -->
+    <style name="Theme.MiKandi.Onetap.Text" parent="android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/onetap_header_size</item>
+        <item name="android:paddingTop">@dimen/card_component_separator_larger</item>
+        <item name="android:paddingBottom">@dimen/card_component_separator_larger</item>
+        <item name="android:textColor">@color/grey_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Theme.MiKandi.Onetap.Text.Helper"><!-- helper for the component below -->
+        <item name="android:paddingTop">@dimen/onetap_helper_padding</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textSize">@dimen/onetap_helper_size</item>
+        <item name="android:visibility">visible</item>
+    </style>
+
+    <style name="Theme.MiKandi.Onetap.Text.Helper.Bottom"> <!-- helper for the component above -->
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">@dimen/onetap_helper_padding</item>
+    </style>
+
 
 </resources>
