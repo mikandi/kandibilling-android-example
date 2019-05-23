@@ -20,8 +20,6 @@ import tools.mikandi.dev.listeners.OnAuthorizeInAppListener;
 import tools.mikandi.dev.listeners.OnFullScreenAdDisplayedListener;
 import tools.mikandi.dev.listeners.onPurchaseHistoryListener;
 import tools.mikandi.dev.listeners.onUserVerificationListener;
-import tools.mikandi.dev.listeners.onPurchaseHistoryListener;
-import tools.mikandi.dev.listeners.onUserVerificationListener;
 import tools.mikandi.dev.utils.Logger;
 import tools.mikandi.dev.utils.UserInfoObject;
 
@@ -33,7 +31,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
 
     private UserInfoObject userInfoObject = null;
     //    private static Context context;
-    private Context context;
+    // private Context context;
     final static String EXTRA_INSTALLER_PACKAGE_NAME = "android.intent.extra.INSTALLER_PACKAGE_NAME";
     final static String INSTALLER_PACKAGE_NAME = "com.mikandi.vending";
     public static boolean debug = true;
@@ -45,7 +43,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
         setContentView(R.layout.main_layout);
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mainToolbar);
-        context = getApplicationContext();
+//        context = getApplicationContext();
 
         main_btn_login_toggle = (ToggleButton) findViewById(R.id.btn_login_toggle);
         main_btn_buy_gold = (Button) findViewById(R.id.main_btn_buyGold);
@@ -85,14 +83,15 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
     @Override
     public void onClick(View v) {
         // updated instance of for each KandiLibs library.
-        userInfoObject = UserInfoObject.getInstance(context);
+        final Context context = this;
+        userInfoObject = UserInfoObject.reload(context);
         if (Logger.isDebug)
             Logger.i("Getting instance of userInfoObject: %1$s", userInfoObject.toString());
 
 
         //launching activities according to the button clicked
         if (debug && v instanceof Button)
-            if (Logger.isDebug) Logger.i("%1$s button pressed", ((Button) v).getText());
+            if (Logger.isDebug) Logger.i("%s button pressed", getResources().getResourceName(v.getId()));
         switch (v.getId()) {
             case R.id.btn_login_toggle:
                 //handling login and logout based on login status
@@ -103,7 +102,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
                     if (Logger.isDebug)
                         Logger.i("Logging user in with user info: %1$s", userInfoObject.toString());
                 } else {
-                    KandiLibs.logOutUser(userInfoObject);
+                    KandiLibs.logOutUser(context);
                 }
                 break;
             case R.id.main_btn_buyGold:
@@ -120,15 +119,15 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
                 break;
             case R.id.main_btn_tokencheck:
                 String token = "last_test_check";
-                boolean testPurchase = KandiLibs.checkPurchase(userInfoObject, token);
-                if (Logger.isDebug) Logger.i("Checking token: %1$s");
+                boolean testPurchase = KandiLibs.checkPurchase(context, token);
+                if (Logger.isDebug) Logger.i("Checking token: %1$s", token);
                 if (Logger.isDebug) Logger.i("Purchased: %1$s", testPurchase);
                 break;
             case R.id.main_btn_adcheck:
                 fullScreenAd(new OnFullScreenAdDisplayedListener() {
                     @Override
                     public void onAdFinished() {
-                        Toast.makeText(userInfoObject.getContext(), "Ad finished", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Ad finished", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -162,7 +161,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
         if (Logger.isDebug) Logger.i("userInfoObject instance is: %1$s", userInfoObject.toString());
         KandiLibs.requestLogin(this, userInfoObject);
         // TODO: 5/17/2019 check if login successful?
-        if (KandiLibs.isLoggedIn(userInfoObject)) {
+        if (KandiLibs.isLoggedIn(this)) {
             main_btn_login_toggle.setChecked(loggedIn);
         }
     }
@@ -181,7 +180,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
      * @return
      */
     protected boolean isLoggedIn(final UserInfoObject userInfoObject) {
-        return KandiLibs.isLoggedIn(userInfoObject);
+        return KandiLibs.isLoggedIn(this);
     }
 
 
@@ -195,7 +194,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
     protected void purchaseToken(final String token, final String token_description,
                                  final String token_amount) {
 
-        KandiLibs.authorizeInAppPurchase(userInfoObject, token, token_description, token_amount, new OnAuthorizeInAppListener() {
+        KandiLibs.authorizeInAppPurchase(this, token, token_description, token_amount, new OnAuthorizeInAppListener() {
             @Override
             public void onSuccess() {
                 if (Logger.isDebug) Logger.i("Token %1$s purchased successfully", token);
@@ -215,7 +214,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
      * @param userInfoObject
      */
     private void listPurchaseHistory(final UserInfoObject userInfoObject) {
-        KandiLibs.requestPurchaseHistory(userInfoObject, new onPurchaseHistoryListener() {
+        KandiLibs.requestPurchaseHistory(this, new onPurchaseHistoryListener() {
             @Override
             public void onSucessfulHistoryRetrieved(List<String> list) {
 
@@ -244,7 +243,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
     }
 
     protected void fullScreenAd(OnFullScreenAdDisplayedListener l) {
-        UserInfoObject.getInstance(context).setFullScreenAdListener(l);
+        UserInfoObject.getInstance(this).setFullScreenAdListener(l);
         KandiLibs.requestFullScreenAd(this, l);
     }
 
@@ -260,8 +259,8 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
      * @param userInfoObject
      */
     protected void verifyUser(final UserInfoObject userInfoObject) {
-        if (Logger.isDebug) Logger.i("Verifying user: %1$s", userInfoObject.toString());
-        KandiLibs.requestUserVerify(userInfoObject, new onUserVerificationListener() {
+//        if (Logger.isDebug) Logger.i("Verifying user: %1$s", userInfoObject.toString());
+        KandiLibs.requestUserVerify(this, new onUserVerificationListener() {
             @Override
             public void userVerifiedSuccessfully() {
                 Toast.makeText(getApplicationContext(), "Verified user ", Toast.LENGTH_LONG).show();
