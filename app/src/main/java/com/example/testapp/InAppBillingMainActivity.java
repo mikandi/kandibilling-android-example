@@ -18,8 +18,10 @@ import java.util.List;
 import tools.mikandi.dev.library.KandiLibs;
 import tools.mikandi.dev.listeners.OnAuthorizeInAppListener;
 import tools.mikandi.dev.listeners.OnFullScreenAdDisplayedListener;
-import tools.mikandi.dev.listeners.OnPurchaseHistoryListener;
-import tools.mikandi.dev.listeners.OnUserVerificationListener;
+import tools.mikandi.dev.listeners.onPurchaseHistoryListener;
+import tools.mikandi.dev.listeners.onUserVerificationListener;
+import tools.mikandi.dev.listeners.onPurchaseHistoryListener;
+import tools.mikandi.dev.listeners.onUserVerificationListener;
 import tools.mikandi.dev.utils.Logger;
 import tools.mikandi.dev.utils.UserInfoObject;
 
@@ -131,7 +133,7 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
                 });
                 break;
             case R.id.main_btn_installer:
-                installMikandiFromWeb();
+//                installMikandiFromWeb();
                 break;
         }
     }
@@ -213,17 +215,21 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
      * @param userInfoObject
      */
     private void listPurchaseHistory(final UserInfoObject userInfoObject) {
-        KandiLibs.requestPurchaseHistory(userInfoObject, new OnPurchaseHistoryListener() {
-
+        KandiLibs.requestPurchaseHistory(userInfoObject, new onPurchaseHistoryListener() {
             @Override
-            public void onSuccessfulHistoryRetrieved(List<String> purchasedItems) {
-                // FIXME: 3/20/2019
-//                LibraryLoginResult libraryLoginResult = userInfoObject.getLoginResult();
-//                ArrayList<String> arrayListTokens = libraryLoginResult.getArrayListTokens();
-//                for (String s : arrayListTokens) {
-//                    if (debug) Log.i(tag, "Printing out new purchases from saved lr: " + s);
-//                }
+            public void onSucessfulHistoryRetrieved(List<String> list) {
+
             }
+
+//            @Override
+//            public void onSuccessfulHistoryRetrieved(List<String> purchasedItems) {
+//                // FIXME: 3/20/2019
+////                LibraryLoginResult libraryLoginResult = userInfoObject.getLoginResult();
+////                ArrayList<String> arrayListTokens = libraryLoginResult.getArrayListTokens();
+////                for (String s : arrayListTokens) {
+////                    if (debug) Log.i(tag, "Printing out new purchases from saved lr: " + s);
+////                }
+//            }
 
             @Override
             public void onFailedHistoryRetrieved() {
@@ -242,9 +248,9 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
         KandiLibs.requestFullScreenAd(this, l);
     }
 
-    protected void installMikandiFromWeb() {
-        KandiLibs.installMiKandi(this);
-    }
+//    protected void installMikandiFromWeb() {
+//        KandiLibs.installMiKandi(this);
+//    }
 
     // TODO: 5/17/2019 check the methods below and the corresponding KandiLibs methods checking legitimate users. Which one is needed/correct?
 
@@ -255,20 +261,32 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
      */
     protected void verifyUser(final UserInfoObject userInfoObject) {
         if (Logger.isDebug) Logger.i("Verifying user: %1$s", userInfoObject.toString());
-        KandiLibs.requestUserVerify(userInfoObject, new OnUserVerificationListener() {
-
+        KandiLibs.requestUserVerify(userInfoObject, new onUserVerificationListener() {
             @Override
-            public void userVerifiedSuccessfully(boolean verified, int responseCode) {
+            public void userVerifiedSuccessfully() {
                 Toast.makeText(getApplicationContext(), "Verified user ", Toast.LENGTH_LONG).show();
                 if (Logger.isDebug) Logger.i("Successful verification: user has purchased the app");
             }
 
             @Override
-            public void userVerifyFailed(boolean verified, int responseCode) {
-                Toast.makeText(getApplicationContext(), "user not verified code " + responseCode, Toast.LENGTH_LONG).show();
+            public void userVerifyFailed(int i) {
+                Toast.makeText(getApplicationContext(), "user not verified code ", Toast.LENGTH_LONG).show();
                 if (Logger.isDebug)
-                    Logger.i("Verification unsuccessful, response code:  %1$d", responseCode);
+                    Logger.i("Verification unsuccessful");
             }
+
+//            @Override
+//            public void userVerifiedSuccessfully(boolean verified, int responseCode) {
+//                Toast.makeText(getApplicationContext(), "Verified user ", Toast.LENGTH_LONG).show();
+//                if (Logger.isDebug) Logger.i("Successful verification: user has purchased the app");
+//            }
+//
+//            @Override
+//            public void userVerifyFailed(boolean verified, int responseCode) {
+//                Toast.makeText(getApplicationContext(), "user not verified code " + responseCode, Toast.LENGTH_LONG).show();
+//                if (Logger.isDebug)
+//                    Logger.i("Verification unsuccessful, response code:  %1$d", responseCode);
+//            }
             //addressing failed verification due to server error
 // FIXME: 3/20/2019 aldebaran dependency conflict
 //            @Override
@@ -282,9 +300,9 @@ public class InAppBillingMainActivity extends AppCompatActivity implements OnCli
      * @param userInfoObject
      * @return
      */
-    protected boolean isLegitInstall(UserInfoObject userInfoObject) {
-        return KandiLibs.checkInstaller(userInfoObject);
-    }
+//    protected boolean isLegitInstall(UserInfoObject userInfoObject) {
+//        return KandiLibs.checkInstaller(userInfoObject);
+//    }
 //    /**
 //     *
 //     * @param string
